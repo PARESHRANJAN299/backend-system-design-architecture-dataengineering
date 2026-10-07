@@ -26,6 +26,7 @@ Phase 1 settled what to request and when. Phase 2 will cover the part that comes
 | # | Folder | What it covers | Status |
 | --- | --- | --- | --- |
 | 04 | [Authentication to Bronze](04-authentication-to-bronze/README.md) | One-time key setup, signing every request, download links, landing files and writing Bronze Delta, with failure cases. | 🔍 In progress |
+| 05 | [Recovering from a pipeline gap](05-recovering-from-a-pipeline-gap/README.md) | A two-day outage found by Paresh and fixed inside the same pipeline: tracking table, status check by date, request by feed date. | 🔍 In progress |
 
 More Phase 2 folders will be added once the understanding is complete and confirmed.
 
