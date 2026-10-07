@@ -23,7 +23,11 @@ Phase 1 settled what to request and when. Phase 2 will cover the part that comes
 - **How the data reaches Bronze Delta:** where the downloaded files land and how they are loaded into the Bronze table.
 - **How the pipeline runs reliably:** retries, tracking what loaded, handling failures and missed deliveries.
 
-No Phase 2 folders exist yet. They will be added once the understanding is complete and confirmed.
+| # | Folder | What it covers | Status |
+| --- | --- | --- | --- |
+| 04 | [Authentication to Bronze](04-authentication-to-bronze/README.md) | One-time key setup, signing every request, download links, landing files and writing Bronze Delta, with failure cases. | 🔍 In progress |
+
+More Phase 2 folders will be added once the understanding is complete and confirmed.
 
 ## Conventions
 
