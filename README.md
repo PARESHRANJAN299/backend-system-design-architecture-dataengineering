@@ -8,6 +8,7 @@ System design and connection flow for data engineering backend architectures, ex
 | --- | --- | --- |
 | 01 | [Walmart data feeds into Databricks](01-walmart-data-feeds-databricks/README.md) (feed = one dataset) | 🔍 In progress: feed concept documented |
 | 02 | [Walmart operations and methods](02-walmart-operations-methods/README.md) (4 operations, GET and POST, extraction flow) | 🔍 In progress: high-level understanding documented |
+| 03 | [Production pipeline design](03-production-pipeline-design/README.md) (parameterized job, incremental loads, team reads Delta) | 🔍 In progress: high-level design documented |
 
 A new folder and table row are added as each architecture is explored and confirmed.
 
