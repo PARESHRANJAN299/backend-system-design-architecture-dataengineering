@@ -5,7 +5,7 @@ System design and connection flow: Coinbase → EC2 → S3 → Databricks.
 
 Live BTC-USD ticker events flow from Coinbase to an EC2 consumer, are batched into S3, and are loaded incrementally by Databricks Auto Loader into Bronze and Silver Delta tables. A scheduled job runs the pipeline, a health check watches the consumer, and a Databricks Asset Bundle deploys everything as code.
 
-The build log (phases, commands, issues and fixes) lives in the source repo: [data-engineering-devops-stack](https://github.com/PARESHRANJAN299/data-engineering-devops-stack). This repo is the architecture deep dive.
+The build log (phases, commands, issues and fixes) lives in the source repo: [data-engineering-devops-stack](https://github.com/PARESHRANJAN299/data-engineering-devops-stack). This folder is the architecture deep dive.
 
 ## Overview
 

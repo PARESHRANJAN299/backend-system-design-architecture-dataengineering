@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" width="960" height="640" role="img" aria-labelledby="t d">
+<title id="t">Walmart data feed request flow</title>
+<desc id="d">Sequence between a Databricks job, the Walmart Data Ventures API and Walmart cloud storage: get a bearer token, check feed status, request history then incremental, receive a signed URL, download the file, then land it and load Bronze as a design choice.</desc>
+<defs><style>
+      .bg{fill:#0d1117} .card{fill:#11161d;stroke:#30363d} .pill{fill:#161b22;stroke:#30363d;stroke-width:1.5}
+      .h{font:700 20px "Segoe UI",Helvetica,Arial,sans-serif;fill:#e6edf3} .s{font:13px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#8b949e}
+      .pt{font:700 13px "Segoe UI",Helvetica,Arial,sans-serif;fill:#e6edf3} .sub{font:11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#8b949e}
+      .num{font:700 12px "Segoe UI",Helvetica,Arial,sans-serif;fill:#58a6ff} .body{font:12px "Segoe UI",Helvetica,Arial,sans-serif;fill:#aab4c0}
+      .note{font:11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#d29922}
+      .life{stroke:#30363d;stroke-width:1.5;stroke-dasharray:3 6}
+      .flow{fill:none;stroke:#3d444d;stroke-width:2}
+      .ghost{fill:none;stroke:#3d444d;stroke-width:1.5;stroke-dasharray:4 5}
+      @media (prefers-reduced-motion:reduce){.anim{display:none}}
+</style>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#58a6ff"/></marker>
+    <marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#3d444d"/></marker>
+  </defs>
+<rect class="bg" width="960" height="640" rx="18"/>
+<rect class="card" x="14" y="14" width="932" height="612" rx="14"/>
+<text x="30" y="52" class="h">Walmart data feed: request flow</text>
+<text x="30" y="74" class="s">one feed = one dataset = one request path; repeat the flow per feed</text>
+<rect x="40" y="96" width="220" height="48" rx="10" class="pill"/>
+<text x="150" y="118" text-anchor="middle" class="pt">Databricks job</text><text x="150" y="134" text-anchor="middle" class="sub">your code</text>
+<line x1="150" y1="144" x2="150" y2="580" class="life"/>
+<rect x="370" y="96" width="220" height="48" rx="10" class="pill"/>
+<text x="480" y="118" text-anchor="middle" class="pt">Walmart Data Ventures API</text><text x="480" y="134" text-anchor="middle" class="sub">feed endpoints</text>
+<line x1="480" y1="144" x2="480" y2="580" class="life"/>
+<rect x="700" y="96" width="220" height="48" rx="10" class="pill"/>
+<text x="810" y="118" text-anchor="middle" class="pt">Walmart cloud storage</text><text x="810" y="134" text-anchor="middle" class="sub">signed URLs</text>
+<line x1="810" y1="144" x2="810" y2="580" class="life"/>
+<path class="flow" d="M150,196 H480" marker-end="url(#ahg)"/>
+<circle cx="170" cy="170" r="11" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/><text x="170" y="174" text-anchor="middle" class="num">1</text>
+<text x="190" y="174" class="pt">Get a bearer token</text>
+<text x="190" y="188" class="body">client credentials issued through your Walmart account team</text>
+<g class="anim"><path d="M150,196 H480" fill="none" stroke="#58a6ff" stroke-width="2.5" marker-end="url(#ah)" opacity="0"><animate attributeName="opacity" dur="18s" repeatCount="indefinite" keyTimes="0;0.0000;0.0040;0.1667;0.1707;1" values="0;0;1;1;0;0"/></path><circle r="5" fill="#58a6ff" filter="url(#glow)" opacity="0"><animate attributeName="opacity" dur="18s" repeatCount="indefinite" keyTimes="0;0.0000;0.0040;0.1667;0.1707;1" values="0;0;1;1;0;0"/><animateMotion dur="18s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.0000;0.1667;1" calcMode="linear" path="M150,196 H480"/></circle></g>
+<path class="flow" d="M150,262 H480" marker-end="url(#ahg)"/>
+<circle cx="170" cy="236" r="11" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/><text x="170" y="240" text-anchor="middle" class="num">2</text>
+<text x="190" y="240" class="pt">Status: is my feed available?</text>
+<text x="190" y="254" class="body">one feed chosen per request, e.g. Store Sales</text>
+<g class="anim"><path d="M150,262 H480" fill="none" stroke="#58a6ff" stroke-width="2.5" marker-end="url(#ah)" opacity="0"><animate attributeName="opacity" dur="18s" repeatCount="indefinite" keyTimes="0;0.1667;0.1707;0.3333;0.3373;1" values="0;0;1;1;0;0"/></path><circle r="5" fill="#58a6ff" filter="url(#glow)" opacity="0"><animate attributeName="opacity" dur="18s" repeatCount="indefinite" keyTimes="0;0.1667;0.1707;0.3333;0.3373;1" values="0;0;1;1;0;0"/><animateMotion dur="18s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.1667;0.3333;1" calcMode="linear" path="M150,262 H480"/></circle></g>
+<path class="flow" d="M150,328 H480" marker-end="url(#ahg)"/>
+<circle cx="170" cy="302" r="11" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/><text x="170" y="306" text-anchor="middle" class="num">3</text>
+<text x="190" y="306" class="pt">History once, then Incremental</text>
+<text x="190" y="320" class="body">history is consumed first, incrementals after</text>
+<g class="anim"><path d="M150,328 H480" fill="none" stroke="#58a6ff" stroke-width="2.5" marker-end="url(#ah)" opacity="0"><animate attributeName="opacity" dur="18s" repeatCount="indefinite" keyTimes="0;0.3333;0.3373;0.5000;0.5040;1" values="0;0;1;1;0;0"/></path><circle r="5" fill="#58a6ff" filter="url(#glow)" opacity="0"><animate attributeName="opacity" dur="18s" repeatCount="indefinite" keyTimes="0;0.3333;0.3373;0.5000;0.5040;1" values="0;0;1;1;0;0"/><animateMotion dur="18s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.3333;0.5000;1" calcMode="linear" path="M150,328 H480"/></circle></g>
+<path class="flow" d="M480,394 H150" marker-end="url(#ahg)"/>
+<circle cx="170" cy="368" r="11" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/><text x="170" y="372" text-anchor="middle" class="num">4</text>
+<text x="190" y="372" class="pt">Signed URL returned</text>
+<text x="190" y="386" class="body">authenticates by query string, expires after about 10 minutes</text>
+<g class="anim"><path d="M480,394 H150" fill="none" stroke="#58a6ff" stroke-width="2.5" marker-end="url(#ah)" opacity="0"><animate attributeName="opacity" dur="18s" repeatCount="indefinite" keyTimes="0;0.5000;0.5040;0.6667;0.6707;1" values="0;0;1;1;0;0"/></path><circle r="5" fill="#58a6ff" filter="url(#glow)" opacity="0"><animate attributeName="opacity" dur="18s" repeatCount="indefinite" keyTimes="0;0.5000;0.5040;0.6667;0.6707;1" values="0;0;1;1;0;0"/><animateMotion dur="18s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.5000;0.6667;1" calcMode="linear" path="M480,394 H150"/></circle></g>
+<path class="flow" d="M150,460 H810" marker-end="url(#ahg)"/>
+<circle cx="170" cy="434" r="11" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/><text x="170" y="438" text-anchor="middle" class="num">5</text>
+<text x="190" y="438" class="pt">Download the file</text>
+<text x="190" y="452" class="body">parquet or ORC (chosen at onboarding), no extra credentials</text>
+<g class="anim"><path d="M150,460 H810" fill="none" stroke="#58a6ff" stroke-width="2.5" marker-end="url(#ah)" opacity="0"><animate attributeName="opacity" dur="18s" repeatCount="indefinite" keyTimes="0;0.6667;0.6707;0.8333;0.8373;1" values="0;0;1;1;0;0"/></path><circle r="5" fill="#58a6ff" filter="url(#glow)" opacity="0"><animate attributeName="opacity" dur="18s" repeatCount="indefinite" keyTimes="0;0.6667;0.6707;0.8333;0.8373;1" values="0;0;1;1;0;0"/><animateMotion dur="18s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.6667;0.8333;1" calcMode="linear" path="M150,460 H810"/></circle></g>
+<path class="ghost" d="M150,526 h60 v26 h-60" marker-end="url(#ahg)"/>
+<circle cx="230" cy="500" r="11" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/><text x="230" y="504" text-anchor="middle" class="num">6</text>
+<text x="250" y="504" class="pt">Land it and load to Bronze</text>
+<text x="250" y="518" class="body">design choice, not Walmart-defined: landing path, Auto Loader, Bronze</text>
+<g class="anim"><path d="M150,526 h60 v26 h-60" fill="none" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="5 5" opacity="0"><animate attributeName="opacity" dur="18s" repeatCount="indefinite" keyTimes="0;0.8333;0.8373;1.0000;1.0040;1" values="0;0;1;1;0;0"/></path></g>
+<line x1="30" y1="588" x2="930" y2="588" stroke="#1c2128"/>
+<text x="30" y="610" class="note">Dashed = my design choice. Solid = documented by Walmart Data Ventures. Large files can be split, each part with its own signed URL.</text>
+</svg>

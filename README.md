@@ -7,6 +7,7 @@ System design and connection flow for data engineering backend architectures, ex
 | # | Architecture | Status |
 | --- | --- | --- |
 | 01 | [Streaming ingestion to a lakehouse](01-streaming-ingestion-lakehouse/README.md) (Coinbase → EC2 → S3 → Databricks) | ✅ Explored, built and running |
+| 02 | [Walmart data feeds into Databricks](02-walmart-data-feeds-databricks/README.md) (feed = one dataset, request flow) | 🔍 In progress: feed concept and API flow documented |
 
 A new folder and table row are added as each architecture is explored and confirmed.
 

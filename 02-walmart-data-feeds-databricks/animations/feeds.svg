@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 548" width="960" height="548" role="img" aria-labelledby="t d">
+<title id="t">One feed is one dataset</title>
+<desc id="d">A Databricks job requests one feed at a time. A request for Store Sales returns only Store Sales data. A separate request to the Store Inventory feed endpoint returns only Store Inventory data.</desc>
+<defs><style>
+      .bg{fill:#0d1117} .card{fill:#11161d;stroke:#30363d} .pill{fill:#161b22;stroke:#30363d;stroke-width:1.5}
+      .h{font:700 20px "Segoe UI",Helvetica,Arial,sans-serif;fill:#e6edf3} .s{font:13px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#8b949e}
+      .pt{font:700 13px "Segoe UI",Helvetica,Arial,sans-serif;fill:#e6edf3} .sub{font:11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#8b949e}
+      .num{font:700 12px "Segoe UI",Helvetica,Arial,sans-serif;fill:#58a6ff} .body{font:12px "Segoe UI",Helvetica,Arial,sans-serif;fill:#aab4c0}
+      .note{font:11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#d29922}
+      .life{stroke:#30363d;stroke-width:1.5;stroke-dasharray:3 6}
+      .flow{fill:none;stroke:#3d444d;stroke-width:2}
+      .ghost{fill:none;stroke:#3d444d;stroke-width:1.5;stroke-dasharray:4 5}
+      @media (prefers-reduced-motion:reduce){.anim{display:none}}
+</style>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#58a6ff"/></marker>
+    <marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#3d444d"/></marker>
+  </defs>
+<rect class="bg" width="960" height="548" rx="18"/>
+<rect class="card" x="14" y="14" width="932" height="520" rx="14"/>
+<text x="30" y="52" class="h">One feed = one dataset</text>
+<text x="30" y="74" class="s">you ask for a feed by its own endpoint, never for all of Walmart's data at once</text>
+<rect x="40" y="170" width="190" height="90" rx="12" class="pill"/>
+<text x="135" y="206" text-anchor="middle" class="pt">Databricks job</text><text x="135" y="224" text-anchor="middle" class="sub">asks for one feed</text><text x="135" y="240" text-anchor="middle" class="sub">per request</text>
+<text x="470" y="96" class="sub">WALMART FEEDS (examples, not a full list)</text>
+<rect x="470" y="104" width="250" height="44" rx="9" class="pill"/>
+<text x="595" y="131" text-anchor="middle" class="pt" fill="#6e7681" style="fill:#8b949e">Store Sales</text>
+<rect x="470" y="162" width="250" height="44" rx="9" class="pill"/>
+<text x="595" y="189" text-anchor="middle" class="pt" fill="#6e7681" style="fill:#8b949e">Store Inventory</text>
+<rect x="470" y="220" width="250" height="44" rx="9" class="pill"/>
+<text x="595" y="247" text-anchor="middle" class="pt" fill="#6e7681" style="fill:#8b949e">DC Dimensions</text>
+<rect x="470" y="278" width="250" height="44" rx="9" class="pill"/>
+<text x="595" y="305" text-anchor="middle" class="pt" fill="#6e7681" style="fill:#8b949e">Item Attributes</text>
+<rect x="470" y="336" width="250" height="44" rx="9" class="pill"/>
+<text x="595" y="363" text-anchor="middle" class="pt" fill="#6e7681" style="fill:#8b949e">Product Dimensions</text>
+<rect x="470" y="394" width="250" height="44" rx="9" class="pill"/>
+<text x="595" y="421" text-anchor="middle" class="pt" fill="#6e7681" style="fill:#8b949e">more feeds ...</text>
+<g class="anim" opacity="0"><animate attributeName="opacity" dur="12s" repeatCount="indefinite" keyTimes="0;0.0500;0.0540;0.4500;0.4540;1" values="0;0;1;1;0;0"/><rect x="470" y="104" width="250" height="44" rx="9" fill="#0d2238" stroke="#58a6ff" stroke-width="2"/><text x="595" y="131" text-anchor="middle" class="pt">Store Sales</text></g>
+<g class="anim" opacity="0"><animate attributeName="opacity" dur="12s" repeatCount="indefinite" keyTimes="0;0.5500;0.5540;0.9500;0.9540;1" values="0;0;1;1;0;0"/><rect x="470" y="162" width="250" height="44" rx="9" fill="#0d2238" stroke="#58a6ff" stroke-width="2"/><text x="595" y="189" text-anchor="middle" class="pt">Store Inventory</text></g>
+<path class="flow" d="M230,215 C330,215 380,126 470,126" marker-end="url(#ahg)"/>
+<path class="flow" d="M230,215 C330,215 380,184 470,184" marker-end="url(#ahg)"/>
+<g class="anim"><path d="M230,215 C330,215 380,126 470,126" fill="none" stroke="#58a6ff" stroke-width="2.5" opacity="0"><animate attributeName="opacity" dur="12s" repeatCount="indefinite" keyTimes="0;0.0500;0.0540;0.4500;0.4540;1" values="0;0;1;1;0;0"/></path><circle r="5" fill="#58a6ff" filter="url(#glow)" opacity="0"><animate attributeName="opacity" dur="12s" repeatCount="indefinite" keyTimes="0;0.0500;0.0540;0.2500;0.2540;1" values="0;0;1;1;0;0"/><animateMotion dur="12s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.0500;0.2500;1" calcMode="linear" path="M230,215 C330,215 380,126 470,126"/></circle><circle r="5" fill="#3fb950" filter="url(#glow)" opacity="0"><animate attributeName="opacity" dur="12s" repeatCount="indefinite" keyTimes="0;0.2500;0.2540;0.4500;0.4540;1" values="0;0;1;1;0;0"/><animateMotion dur="12s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.2500;0.4500;1" calcMode="linear" path="M470,126 C380,126 330,215 230,215"/></circle></g>
+<g class="anim"><path d="M230,215 C330,215 380,184 470,184" fill="none" stroke="#58a6ff" stroke-width="2.5" opacity="0"><animate attributeName="opacity" dur="12s" repeatCount="indefinite" keyTimes="0;0.5500;0.5540;0.9500;0.9540;1" values="0;0;1;1;0;0"/></path><circle r="5" fill="#58a6ff" filter="url(#glow)" opacity="0"><animate attributeName="opacity" dur="12s" repeatCount="indefinite" keyTimes="0;0.5500;0.5540;0.7500;0.7540;1" values="0;0;1;1;0;0"/><animateMotion dur="12s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.5500;0.7500;1" calcMode="linear" path="M230,215 C330,215 380,184 470,184"/></circle><circle r="5" fill="#3fb950" filter="url(#glow)" opacity="0"><animate attributeName="opacity" dur="12s" repeatCount="indefinite" keyTimes="0;0.7500;0.7540;0.9500;0.9540;1" values="0;0;1;1;0;0"/><animateMotion dur="12s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.7500;0.9500;1" calcMode="linear" path="M470,184 C380,184 330,215 230,215"/></circle></g>
+<text x="736" y="130" class="body">request 1: only Store Sales</text>
+<text x="736" y="188" class="body">request 2: only Store Inventory</text>
+<line x1="30" y1="456" x2="930" y2="456" stroke="#1c2128"/>
+<text x="30" y="480" class="body">A request names one feed. The data that comes back is only that feed.</text>
+<text x="30" y="500" class="body">To get a second dataset, make a second request to that feed's own endpoint.</text>
+<text x="30" y="518" class="note">The number of feeds is not fixed here; the tiles are examples. Blue dot = request, green dot = that feed's data coming back.</text>
+</svg>
