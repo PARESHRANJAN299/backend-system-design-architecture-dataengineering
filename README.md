@@ -1,4 +1,4 @@
-# backend-system-design-architecture-dataengineering-streaming-lakehouse
+# backend-system-design-architecture-dataengineering
 
 System design and connection flow for a streaming data engineering backend: Coinbase → EC2 → S3 → Databricks. One architecture per repo.
 
