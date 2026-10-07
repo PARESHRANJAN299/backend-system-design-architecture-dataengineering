@@ -27,7 +27,7 @@ System design and connection flow for pulling Walmart Data Ventures data into Da
 | 3 | Consume **History** first (mandatory), then **Incremental** on later runs. | Documented |
 | 4 | The API returns a **signed URL**. It authenticates by query string, so no extra credentials are needed, and it expires after about 10 minutes. | Documented |
 | 5 | Download the file from cloud storage. The format, parquet or ORC, is chosen at onboarding. Large files can be split into several parts, each with its own signed URL. | Documented |
-| 6 | Land the files and load them to Bronze, for example with Auto Loader as in [architecture 01](../01-streaming-ingestion-lakehouse/README.md). | **My design choice**, not defined by Walmart |
+| 6 | Land the files and load them to Bronze, for example with Auto Loader. | **My design choice**, not defined by Walmart |
 
 Other documented facts: the API has four endpoint categories (**Snapshot, History, Status, Incremental**), and incremental and history feeds are kept for a maximum of 45 days. Snapshot feeds use paths of the form `/bulkfeeds/snapshot/<feed>`, for example `dcdimensions`.
 
