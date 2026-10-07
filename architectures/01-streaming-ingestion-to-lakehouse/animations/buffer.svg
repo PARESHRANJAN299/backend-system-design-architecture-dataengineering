@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 700" width="960" height="700" role="img" aria-labelledby="t d">
+  <title id="t">How the streaming buffer works</title>
+  <desc id="d">Ticker events arrive over a WebSocket and collect in an in-memory buffer. When 15 seconds have passed since the last flush, the buffer is written as one JSON file to S3. If all upload attempts fail, the file is spooled to disk and replayed later. Reconnect, graceful stop and the next hop into Databricks keep the loop running.</desc>
+  <defs>
+    <style>
+      .bg{fill:#0d1117} .zone{fill:#11161d;stroke:#30363d} .node{fill:#161b22;stroke:#30363d;stroke-width:1.5}
+      .zlab{font:600 11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#8b949e;letter-spacing:2px}
+      .title{font:700 17px "Segoe UI",Helvetica,Arial,sans-serif;fill:#e6edf3} .ctitle{font:700 16px "Segoe UI",Helvetica,Arial,sans-serif;fill:#e6edf3}
+      .sub{font:11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#8b949e} .edge{font:11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#7d8590}
+      .body{font:12px "Segoe UI",Helvetica,Arial,sans-serif;fill:#9da7b3} .stt{font:700 13px "Segoe UI",Helvetica,Arial,sans-serif;fill:#e6edf3}
+      .flow{fill:none;stroke:#3d444d;stroke-width:2}
+      .run{fill:none;stroke:#58a6ff;stroke-width:2;stroke-dasharray:6 8;animation:dash 1.2s linear infinite}
+      .fail{fill:none;stroke:#d29922;stroke-width:2;stroke-dasharray:4 6;animation:dash 1.6s linear infinite}
+      @keyframes dash{to{stroke-dashoffset:-28}}
+    </style>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <marker id="am" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#d29922"/></marker>
+  </defs>
+  <rect class="bg" width="960" height="700" rx="18"/>
+
+  <!-- band 1 -->
+  <rect class="zone" x="20" y="20" width="920" height="196" rx="14"/>
+  <text class="zlab" x="40" y="44">1 · RECEIVE AND BUFFER (IN MEMORY)</text>
+  <path id="ea1" class="flow" d="M244,126 H320"/><path id="ea2" class="flow" d="M520,126 H596"/>
+  <path class="run" d="M244,126 H320"/><path class="run" d="M520,126 H596"/>
+  <text class="edge" x="282" y="116" text-anchor="middle">JSON</text>
+  <text class="edge" x="558" y="116" text-anchor="middle">append</text>
+  <g ><rect class="node" x="44" y="84" width="200" height="84" rx="12"/><rect x="44" y="100" width="5" height="52" rx="2.5" fill="#1652f0"/><text class="title" x="66" y="114">Coinbase</text><text class="sub" x="66" y="136">BTC-USD ticker</text><text class="sub" x="66" y="154">one JSON per update</text></g>
+  <g ><rect class="node" x="320" y="84" width="200" height="84" rx="12"/><rect x="320" y="100" width="5" height="52" rx="2.5" fill="#58a6ff"/><text class="title" x="342" y="114">on_message</text><text class="sub" x="342" y="136">keeps ticker events</text><text class="sub" x="342" y="154">checks the 15 s clock</text></g>
+  <g><rect class="node" x="596" y="76" width="314" height="108" rx="12"/><rect x="596" y="94" width="5" height="72" rx="2.5" fill="#cd7f32"/>
+     <text class="title" x="618" y="104">In-memory buffer</text>
+     <text class="sub" x="618" y="124">Python list · cap 50,000 events</text>
+     <text class="sub" x="618" y="140">oldest dropped if full</text>
+     <rect x="618" y="154" width="268" height="10" rx="5" fill="#1c2128"/>
+     <rect x="618" y="154" width="0" height="10" rx="5" fill="#58a6ff"><animate attributeName="width" values="0;268;268;0" keyTimes="0;0.88;0.99;1" dur="15s" repeatCount="indefinite"/></rect>
+     <text class="edge" x="618" y="178" style="font-size:10px">0 s</text><text class="edge" x="886" y="178" text-anchor="end" style="font-size:10px">15 s</text></g>
+  <rect x="596" y="76" width="314" height="108" rx="12" fill="none" stroke="#cd7f32" stroke-width="2.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.88;0.884;0.93;0.9400000000000001;1" dur="15s" repeatCount="indefinite"/></rect>
+
+  <!-- flush trigger edge -->
+  <path id="p1" class="flow" d="M753,184 V238 H144 V300"/>
+  <path class="run" d="M753,184 V238 H144 V300"/>
+  <text class="edge" x="448" y="230" text-anchor="middle">on the next message after 15 s have passed since the last flush</text>
+
+  <!-- band 2 -->
+  <rect class="zone" x="20" y="252" width="920" height="200" rx="14"/>
+  <text class="zlab" x="40" y="276">2 · FLUSH · ONE FILE PER FLUSH</text>
+  <text class="edge" x="910" y="276" text-anchor="end" style="font-size:10px">coinbase/raw/YYYY/MM/DD/HH/events_YYYYMMDD_HHMMSS_ffffff.json</text>
+  <path id="p2" class="flow" d="M244,342 H360"/><path id="p3" class="flow" d="M580,342 H706"/>
+  <path class="run" d="M244,342 H360"/><path class="run" d="M580,342 H706"/>
+  <text class="edge" x="302" y="332" text-anchor="middle">JSON lines</text>
+  <text class="edge" x="643" y="332" text-anchor="middle">IAM role</text>
+  <g ><rect class="node" x="44" y="300" width="200" height="84" rx="12"/><rect x="44" y="316" width="5" height="52" rx="2.5" fill="#3fb950"/><text class="title" x="66" y="330">Flush</text><text class="sub" x="66" y="352">events → JSON lines</text><text class="sub" x="66" y="370">one batch = one file</text></g>
+  <g ><rect class="node" x="360" y="300" width="220" height="84" rx="12"/><rect x="360" y="316" width="5" height="52" rx="2.5" fill="#ff9900"/><text class="title" x="382" y="330">boto3 put_object</text><text class="sub" x="382" y="352">up to 5 attempts</text><text class="sub" x="382" y="370">backoff between tries</text></g>
+  <g ><rect class="node" x="706" y="300" width="204" height="84" rx="12"/><rect x="706" y="316" width="5" height="52" rx="2.5" fill="#ff9900"/><text class="title" x="728" y="330">Amazon S3</text><text class="sub" x="728" y="352">raw landing zone</text><text class="sub" x="728" y="370">events_&lt;time&gt;.json</text></g>
+  <path class="fail" d="M470,384 V404" marker-end="url(#am)"/>
+  <text class="edge" x="482" y="398" style="fill:#d29922">all attempts failed</text>
+  <g><rect class="node" x="360" y="404" width="260" height="40" rx="10" style="stroke:#6b5a1f"/><text class="stt" x="378" y="421">Spool to local disk</text><text class="sub" x="378" y="436">/var/tmp/coinbase_spool</text></g>
+  <path class="fail" d="M620,424 H808 V388" marker-end="url(#am)"/>
+  <text class="edge" x="900" y="440" text-anchor="end" style="fill:#d29922">replayed after the next success and at startup</text>
+  <rect x="44" y="300" width="200" height="84" rx="12" fill="none" stroke="#3fb950" stroke-width="2.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.93;0.934;0.95;0.96;1" dur="15s" repeatCount="indefinite"/></rect><rect x="360" y="300" width="220" height="84" rx="12" fill="none" stroke="#3fb950" stroke-width="2.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.95;0.954;0.97;0.98;1" dur="15s" repeatCount="indefinite"/></rect><rect x="706" y="300" width="204" height="84" rx="12" fill="none" stroke="#3fb950" stroke-width="2.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.975;0.979;0.998;1.008;1" dur="15s" repeatCount="indefinite"/></rect>
+
+  <!-- band 3 -->
+  <rect class="zone" x="20" y="472" width="920" height="176" rx="14"/>
+  <text class="zlab" x="40" y="496">3 · WHAT KEEPS THE LOOP RUNNING</text>
+  <g><rect class="node" x="44" y="516" width="272" height="108" rx="12"/><text class="ctitle" x="64" y="546">Reconnect</text>
+     <text class="body" x="64" y="570">Backoff 1 s, 2 s, 4 s … up to 60 s</text>
+     <text class="body" x="64" y="588">Resets after 60 s of stable connection</text>
+     <text class="body" x="64" y="606">Ping every 20 s detects a dead link</text></g>
+  <g><rect class="node" x="344" y="516" width="272" height="108" rx="12"/><text class="ctitle" x="364" y="546">Graceful stop</text>
+     <text class="body" x="364" y="570">SIGTERM triggers a final flush</text>
+     <text class="body" x="364" y="588">systemd restarts the service</text>
+     <text class="body" x="364" y="606">Startup replays any spooled files</text></g>
+  <g><rect class="node" x="644" y="516" width="272" height="108" rx="12"/><text class="ctitle" x="664" y="546">Next hop: Databricks</text>
+     <text class="body" x="664" y="570">Auto Loader picks up each new file</text>
+     <text class="body" x="664" y="588">A job runs every 15 minutes</text>
+     <text class="body" x="664" y="606">Bronze, then Silver (deduplicated)</text></g>
+
+  <!-- moving things -->
+  <g filter="url(#glow)">
+    <circle r="4" fill="#58a6ff"><animateMotion dur="1.4s" begin="0.00s" repeatCount="indefinite"><mpath href="#ea1"/></animateMotion></circle><circle r="4" fill="#58a6ff"><animateMotion dur="1.4s" begin="0.47s" repeatCount="indefinite"><mpath href="#ea1"/></animateMotion></circle><circle r="4" fill="#58a6ff"><animateMotion dur="1.4s" begin="0.93s" repeatCount="indefinite"><mpath href="#ea1"/></animateMotion></circle><circle r="4" fill="#58a6ff"><animateMotion dur="1.4s" begin="0.00s" repeatCount="indefinite"><mpath href="#ea2"/></animateMotion></circle><circle r="4" fill="#58a6ff"><animateMotion dur="1.4s" begin="0.47s" repeatCount="indefinite"><mpath href="#ea2"/></animateMotion></circle><circle r="4" fill="#58a6ff"><animateMotion dur="1.4s" begin="0.93s" repeatCount="indefinite"><mpath href="#ea2"/></animateMotion></circle>
+    <g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.89;0.892;0.93;0.932;1" dur="15s" repeatCount="indefinite"/><rect x="-15" y="-11" width="30" height="22" rx="4" fill="#0d1117" stroke="#3fb950" stroke-width="2"/><text x="0" y="4" text-anchor="middle" style="font:700 11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#3fb950">{ }</text><animateMotion dur="15s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.89;0.93;1" path="M753,184 V238 H144 V300"/></g>
+    <g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.93;0.932;0.95;0.952;1" dur="15s" repeatCount="indefinite"/><rect x="-15" y="-11" width="30" height="22" rx="4" fill="#0d1117" stroke="#3fb950" stroke-width="2"/><text x="0" y="4" text-anchor="middle" style="font:700 11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#3fb950">{ }</text><animateMotion dur="15s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.93;0.95;1" path="M244,342 H360"/></g>
+    <g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.95;0.952;0.975;0.977;1" dur="15s" repeatCount="indefinite"/><rect x="-15" y="-11" width="30" height="22" rx="4" fill="#0d1117" stroke="#3fb950" stroke-width="2"/><text x="0" y="4" text-anchor="middle" style="font:700 11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#3fb950">{ }</text><animateMotion dur="15s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.95;0.975;1" path="M580,342 H706"/></g>
+  </g>
+
+  <!-- legend -->
+  <circle cx="48" cy="676" r="4" fill="#58a6ff"/><text class="edge" x="60" y="680">ticker event</text>
+  <rect x="160" y="670" width="14" height="10" rx="2" fill="none" stroke="#3fb950" stroke-width="2"/><text class="edge" x="182" y="680">batch file</text>
+  <line x1="270" y1="675" x2="292" y2="675" stroke="#d29922" stroke-width="2" stroke-dasharray="4 4"/><text class="edge" x="300" y="680">failure path</text>
+  <text class="edge" x="912" y="680" text-anchor="end">the cycle repeats every 15 s</text>
+</svg>

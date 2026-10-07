@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 604" width="960" height="604" role="img" aria-labelledby="t d">
+  <title id="t">data-engineering-devops-stack architecture</title>
+  <desc id="d">A Coinbase WebSocket feed is read by a Python consumer on AWS EC2, written to S3, read by Databricks Auto Loader into Bronze and Silver Delta tables, with Gold planned. A scheduled job, a health check and an Asset Bundle deployment support the pipeline.</desc>
+  <defs>
+    <style>
+      .bg{fill:#0d1117} .zone{fill:#11161d;stroke:#30363d} .node{fill:#161b22;stroke:#30363d;stroke-width:1.5}
+      .next{fill:#12161c;stroke:#3d444d;stroke-width:1.5;stroke-dasharray:6 5}
+      .zlab{font:600 11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#8b949e;letter-spacing:2px}
+      .title{font:700 17px "Segoe UI",Helvetica,Arial,sans-serif;fill:#e6edf3}
+      .sub{font:11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#8b949e}
+      .edge{font:11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#7d8590}
+      .flow{fill:none;stroke:#3d444d;stroke-width:2}
+      .run{fill:none;stroke:#58a6ff;stroke-width:2;stroke-dasharray:6 8;animation:dash 1.2s linear infinite}
+      .ops{fill:none;stroke:#a371f7;stroke-width:2;stroke-dasharray:4 7;animation:dash 1.6s linear infinite}
+      .halo{fill:none;stroke-width:2;transform-box:fill-box;transform-origin:center;animation:halo 2.4s ease-out infinite}
+      .pulse{animation:blink 1.6s ease-in-out infinite}
+      .dim{opacity:.55}
+      @keyframes dash{to{stroke-dashoffset:-28}}
+      @keyframes halo{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.12,1.35)}}
+      @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+      @media (prefers-reduced-motion:reduce){.run,.ops,.halo,.pulse{animation:none}}
+    </style>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a371f7"/></marker>
+  </defs>
+
+  <rect class="bg" width="960" height="604" rx="18"/>
+
+  <!-- zones -->
+  <rect class="zone" x="20" y="20" width="920" height="170" rx="14"/>
+  <text class="zlab" x="40" y="44">INGEST  ·  COINBASE + AWS</text>
+  <rect class="zone" x="20" y="222" width="920" height="170" rx="14"/>
+  <text class="zlab" x="150" y="246">LAKEHOUSE  ·  DATABRICKS + UNITY CATALOG</text>
+  <rect class="zone" x="20" y="424" width="920" height="140" rx="14"/>
+  <text class="zlab" x="40" y="448">DELIVERY + OPERATIONS</text>
+
+  <!-- data edges -->
+  <path id="e1" class="flow" d="M260,126 H375"/>
+  <path id="e2" class="flow" d="M585,126 H700"/>
+  <path id="e3" class="flow" d="M805,168 V206 H135 V282"/>
+  <path id="e4" class="flow" d="M220,324 H280"/>
+  <path id="e5" class="flow" d="M450,324 H510"/>
+  <path id="e6" class="flow" stroke-dasharray="3 7" d="M680,324 H740"/>
+  <path class="run" d="M260,126 H375"/><path class="run" d="M585,126 H700"/>
+  <path class="run" d="M805,168 V206 H135 V282"/>
+  <path class="run" d="M220,324 H280"/><path class="run" d="M450,324 H510"/>
+
+  <!-- ops edges (arrowheads point at what they act on) -->
+  <path class="ops" d="M250,470 V396" marker-end="url(#arr)"/>
+  <path class="ops" d="M480,470 V396" marker-end="url(#arr)"/>
+  <path class="ops" d="M910,510 H928 V126 H914" marker-end="url(#arr)"/>
+
+  <!-- edge labels -->
+  <text class="edge" x="318" y="116" text-anchor="middle">wss</text>
+  <text class="edge" x="643" y="116" text-anchor="middle">boto3 · IAM role</text>
+  <text class="edge" x="470" y="198" text-anchor="middle">Storage Credential + External Location</text>
+  <text class="edge" x="250" y="314" text-anchor="middle">cloudFiles</text>
+  <text class="edge" x="480" y="314" text-anchor="middle">stream</text>
+  <text class="edge dim" x="710" y="314" text-anchor="middle">next</text>
+  <text class="edge" x="262" y="418" text-anchor="start">deploys</text>
+  <text class="edge" x="492" y="418" text-anchor="start">runs</text>
+
+  <!-- ingest nodes -->
+  <g><rect class="node" x="50" y="84" width="210" height="84" rx="12"/><rect x="50" y="102" width="5" height="48" rx="2.5" fill="#1652f0"/>
+     <text class="title" x="74" y="116">Coinbase</text><text class="sub" x="74" y="138">Advanced Trade WebSocket</text><text class="sub" x="74" y="156">BTC-USD ticker</text></g>
+  <g><rect class="node" x="375" y="84" width="210" height="84" rx="12"/><rect x="375" y="102" width="5" height="48" rx="2.5" fill="#ff9900"/>
+     <text class="title" x="399" y="116">EC2 consumer</text><text class="sub" x="399" y="138">Python · systemd service</text><text class="sub" x="399" y="156">15s buffer · retries</text></g>
+  <g><rect class="node" x="700" y="84" width="210" height="84" rx="12"/><rect x="700" y="102" width="5" height="48" rx="2.5" fill="#ff9900"/>
+     <text class="title" x="724" y="116">Amazon S3</text><text class="sub" x="724" y="138">raw JSON batches</text><text class="sub" x="724" y="156">partitioned by hour</text></g>
+
+  <!-- lakehouse nodes -->
+  <g><rect class="node" x="50" y="282" width="170" height="84" rx="12"/><rect x="50" y="300" width="5" height="48" rx="2.5" fill="#ff3621"/>
+     <text class="title" x="74" y="314">Auto Loader</text><text class="sub" x="74" y="336">cloudFiles · JSON</text><text class="sub" x="74" y="354">serverless pipeline</text></g>
+  <g><rect class="halo" x="280" y="282" width="170" height="84" rx="12" stroke="#cd7f32"/><rect class="node" x="280" y="282" width="170" height="84" rx="12" style="stroke:#cd7f32"/><rect x="280" y="300" width="5" height="48" rx="2.5" fill="#cd7f32"/>
+     <text class="title" x="304" y="314">Bronze</text><text class="sub" x="304" y="336">Delta table</text><text class="sub" x="304" y="354">raw, append-only</text></g>
+  <g><rect class="halo" x="510" y="282" width="170" height="84" rx="12" stroke="#c0c0c0" style="animation-delay:1.2s"/><rect class="node" x="510" y="282" width="170" height="84" rx="12" style="stroke:#9aa4ae"/><rect x="510" y="300" width="5" height="48" rx="2.5" fill="#c0c0c0"/>
+     <text class="title" x="534" y="314">Silver</text><text class="sub" x="534" y="336">typed + validated</text><text class="sub" x="534" y="354">deduplicated</text></g>
+  <g class="dim"><rect class="next" x="740" y="282" width="170" height="84" rx="12"/><rect x="740" y="300" width="5" height="48" rx="2.5" fill="#ffd700"/>
+     <text class="title" x="764" y="314">Gold</text><text class="sub" x="764" y="336">business-ready</text><text class="sub" x="764" y="354">planned · Phase 7</text></g>
+
+  <!-- ops nodes -->
+  <g><rect class="node" x="50" y="470" width="270" height="82" rx="12"/><rect x="50" y="488" width="5" height="46" rx="2.5" fill="#a371f7"/>
+     <text class="title" x="74" y="498">Databricks Asset Bundle</text><text class="sub" x="74" y="520">dev target · pipeline + jobs</text><text class="sub" x="74" y="538">deployed as code</text></g>
+  <g><rect class="node" x="345" y="470" width="270" height="82" rx="12"/><rect x="345" y="488" width="5" height="46" rx="2.5" fill="#a371f7"/>
+     <text class="title" x="369" y="498">Scheduled job</text><text class="sub" x="369" y="520">every 15 min · 3 retries</text><text class="sub" x="369" y="538">email on failure</text>
+     <circle class="pulse" cx="592" cy="494" r="5" fill="#3fb950"/></g>
+  <g><rect class="node" x="640" y="470" width="270" height="82" rx="12"/><rect x="640" y="488" width="5" height="46" rx="2.5" fill="#a371f7"/>
+     <text class="title" x="664" y="498">Health check</text><text class="sub" x="664" y="520">every 15 min · reads S3</text><text class="sub" x="664" y="538">alerts if consumer stops</text>
+     <circle class="pulse" cx="887" cy="494" r="5" fill="#3fb950" style="animation-delay:.8s"/></g>
+
+  <!-- data packets -->
+  <g filter="url(#glow)" fill="#58a6ff">
+    <circle r="4.5"><animateMotion dur="1.8s" repeatCount="indefinite" begin="0s"><mpath href="#e1"/></animateMotion></circle>
+    <circle r="4.5"><animateMotion dur="1.8s" repeatCount="indefinite" begin="0.9s"><mpath href="#e1"/></animateMotion></circle>
+    <circle r="4.5"><animateMotion dur="1.8s" repeatCount="indefinite" begin="0.3s"><mpath href="#e2"/></animateMotion></circle>
+    <circle r="4.5"><animateMotion dur="1.8s" repeatCount="indefinite" begin="1.2s"><mpath href="#e2"/></animateMotion></circle>
+    <circle r="4.5"><animateMotion dur="4.2s" repeatCount="indefinite" begin="0s"><mpath href="#e3"/></animateMotion></circle>
+    <circle r="4.5"><animateMotion dur="4.2s" repeatCount="indefinite" begin="2.1s"><mpath href="#e3"/></animateMotion></circle>
+    <circle r="4.5"><animateMotion dur="1.2s" repeatCount="indefinite"><mpath href="#e4"/></animateMotion></circle>
+    <circle r="4.5"><animateMotion dur="1.2s" repeatCount="indefinite"><mpath href="#e5"/></animateMotion></circle>
+  </g>
+
+<g><circle cx="318" cy="144" r="10" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/><text x="318" y="148" text-anchor="middle" style="font:700 11px Segoe UI,Helvetica,Arial,sans-serif;fill:#58a6ff">1</text><circle cx="643" cy="144" r="10" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/><text x="643" y="148" text-anchor="middle" style="font:700 11px Segoe UI,Helvetica,Arial,sans-serif;fill:#58a6ff">2</text><circle cx="240" cy="206" r="10" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/><text x="240" y="210" text-anchor="middle" style="font:700 11px Segoe UI,Helvetica,Arial,sans-serif;fill:#58a6ff">3</text><circle cx="250" cy="344" r="10" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/><text x="250" y="348" text-anchor="middle" style="font:700 11px Segoe UI,Helvetica,Arial,sans-serif;fill:#58a6ff">4</text><circle cx="480" cy="344" r="10" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/><text x="480" y="348" text-anchor="middle" style="font:700 11px Segoe UI,Helvetica,Arial,sans-serif;fill:#58a6ff">5</text><circle cx="462" cy="410" r="10" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/><text x="462" y="414" text-anchor="middle" style="font:700 11px Segoe UI,Helvetica,Arial,sans-serif;fill:#58a6ff">6</text><circle cx="928" cy="300" r="10" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/><text x="928" y="304" text-anchor="middle" style="font:700 11px Segoe UI,Helvetica,Arial,sans-serif;fill:#58a6ff">7</text><circle cx="238" cy="410" r="10" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/><text x="238" y="414" text-anchor="middle" style="font:700 11px Segoe UI,Helvetica,Arial,sans-serif;fill:#58a6ff">9</text></g>
+  <!-- legend -->
+  <circle class="pulse" cx="48" cy="584" r="4" fill="#3fb950"/>
+  <text class="edge" x="60" y="588">live · Coinbase → S3 → Bronze → Silver</text>
+  <text class="edge dim" x="380" y="588">dashed = planned</text>
+  <text class="edge" x="912" y="588" text-anchor="end">numbers = connections, detailed in the repository docs</text>
+</svg>

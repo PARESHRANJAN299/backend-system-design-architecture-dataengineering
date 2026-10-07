@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" width="960" height="360" role="img" aria-labelledby="t d">
+  <title id="t">Backend connectivity map</title>
+  <desc id="d">Architecture 01, streaming ingestion to a lakehouse, drawn as a chain: Coinbase, EC2 consumer, S3, Databricks Auto Loader, Bronze, Silver. Below it a dashed row marks the next architecture, still to be explored.</desc>
+  <defs>
+    <style>
+      .bg{fill:#0d1117} .card{fill:#11161d;stroke:#30363d} .pill{fill:#161b22;stroke:#30363d;stroke-width:1.5}
+      .ghost{fill:none;stroke:#30363d;stroke-width:1.5;stroke-dasharray:4 6}
+      .h{font:700 20px "Segoe UI",Helvetica,Arial,sans-serif;fill:#e6edf3} .s{font:13px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#8b949e}
+      .pt{font:700 13px "Segoe UI",Helvetica,Arial,sans-serif;fill:#e6edf3} .dim{font:700 13px "Segoe UI",Helvetica,Arial,sans-serif;fill:#6e7681}
+      .num{font:700 12px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#58a6ff} .st{font:10px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#3fb950}
+      .flow{fill:none;stroke:#3d444d;stroke-width:2}
+      .run{fill:none;stroke:#58a6ff;stroke-width:2;stroke-dasharray:5 7;animation:dash 1.2s linear infinite}
+      @keyframes dash{to{stroke-dashoffset:-24}}
+      @media (prefers-reduced-motion:reduce){.run{animation:none}}
+    </style>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect class="bg" width="960" height="360" rx="18"/>
+  <rect class="card" x="14" y="14" width="932" height="332" rx="14"/>
+  <text x="30" y="52" class="h">Backend connectivity map</text>
+  <text x="30" y="74" class="s">one architecture at a time, each with its own deep dive and animations</text>
+
+  <text x="30" y="118" class="num">01</text>
+  <text x="62" y="118" class="st">● explored · streaming ingestion to a lakehouse</text>
+
+  <rect x="30" y="134" width="110" height="40" rx="9" class="pill"/><text x="85" y="158" text-anchor="middle" class="pt">Coinbase</text>
+  <rect x="190" y="134" width="120" height="40" rx="9" class="pill"/><text x="250" y="158" text-anchor="middle" class="pt">EC2 consumer</text>
+  <rect x="360" y="134" width="90" height="40" rx="9" class="pill"/><text x="405" y="158" text-anchor="middle" class="pt">S3</text>
+  <rect x="500" y="134" width="150" height="40" rx="9" class="pill"/><text x="575" y="158" text-anchor="middle" class="pt">Auto Loader</text>
+  <rect x="700" y="134" width="100" height="40" rx="9" class="pill"/><text x="750" y="158" text-anchor="middle" class="pt">Bronze</text>
+  <rect x="850" y="134" width="80" height="40" rx="9" class="pill"/><text x="890" y="158" text-anchor="middle" class="pt">Silver</text>
+
+  <path class="flow" d="M140,154 H190 M310,154 H360 M450,154 H500 M650,154 H700 M800,154 H850"/>
+  <path class="run" d="M140,154 H190 M310,154 H360 M450,154 H500 M650,154 H700 M800,154 H850"/>
+  <circle r="4" fill="#58a6ff" filter="url(#glow)"><animateMotion dur="5s" repeatCount="indefinite" path="M140,154 H930"/></circle>
+
+  <text x="30" y="230" class="num">02</text>
+  <text x="62" y="230" class="s">next architecture, to be explored</text>
+  <rect x="30" y="246" width="110" height="40" rx="9" class="ghost"/><rect x="190" y="246" width="120" height="40" rx="9" class="ghost"/>
+  <rect x="360" y="246" width="90" height="40" rx="9" class="ghost"/><rect x="500" y="246" width="150" height="40" rx="9" class="ghost"/>
+  <text x="85" y="270" text-anchor="middle" class="dim">?</text><text x="250" y="270" text-anchor="middle" class="dim">?</text>
+  <text x="405" y="270" text-anchor="middle" class="dim">?</text><text x="575" y="270" text-anchor="middle" class="dim">?</text>
+  <text x="30" y="324" class="s">each new architecture adds a row here, and a folder under architectures/</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 574" width="960" height="574" role="img" aria-labelledby="t d">
+  <title id="t">Scaling the streaming pipeline</title>
+  <desc id="d">Today: one source, one EC2 consumer, S3 and Databricks, suited to startup scale. At large scale: many producers, Kinesis Data Streams, Amazon Data Firehose, S3 and Databricks, with an optional direct Kinesis read from Databricks.</desc>
+  <defs>
+    <style>
+      .bg{fill:#0d1117} .zone{fill:#11161d;stroke:#30363d} .rec{fill:#10171f;stroke:#2f6f4f} .node{fill:#161b22;stroke:#30363d;stroke-width:1.5}
+      .zlab{font:600 11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#8b949e;letter-spacing:2px} .zrec{font:600 11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#3fb950;letter-spacing:2px}
+      .title{font:700 17px "Segoe UI",Helvetica,Arial,sans-serif;fill:#e6edf3} .sub{font:11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#8b949e} .edge{font:11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#7d8590}
+      .body{font:12px "Segoe UI",Helvetica,Arial,sans-serif;fill:#9da7b3} .good{font:12px "Segoe UI",Helvetica,Arial,sans-serif;fill:#c3cbd4}
+      .flow{fill:none;stroke:#3d444d;stroke-width:2}
+      .run{fill:none;stroke:#58a6ff;stroke-width:2;stroke-dasharray:6 8;animation:dash 1.2s linear infinite}
+      .alt{fill:none;stroke:#a371f7;stroke-width:2;stroke-dasharray:4 7;animation:dash 1.6s linear infinite}
+      .halo{fill:none;stroke-width:2;transform-box:fill-box;transform-origin:center;animation:halo 2.4s ease-out infinite}
+      @keyframes dash{to{stroke-dashoffset:-28}}
+      @keyframes halo{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.1,1.3)}}
+      @media (prefers-reduced-motion:reduce){.run,.alt,.halo{animation:none}}
+    </style>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <marker id="av" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a371f7"/></marker>
+  </defs>
+  <rect class="bg" width="960" height="574" rx="18"/>
+
+  <rect class="zone" x="20" y="20" width="920" height="210" rx="14"/>
+  <text class="zlab" x="40" y="44">TODAY · STARTUP SCALE · SIMPLE AND LOW COST</text>
+  <path id="a0" class="flow" d="M216,112 H276"/><path id="a1" class="flow" d="M448,112 H508"/><path id="a2" class="flow" d="M680,112 H740"/><path class="run" d="M216,112 H276"/><path class="run" d="M448,112 H508"/><path class="run" d="M680,112 H740"/>
+  <g><rect class="node" x="44" y="70" width="172" height="84" rx="12"/><rect x="44" y="86" width="5" height="52" rx="2.5" fill="#1652f0"/><text class="title" x="64" y="100">Source</text><text class="sub" x="64" y="122">one WebSocket</text><text class="sub" x="64" y="140">single stream</text></g>
+  <g><rect class="node" x="276" y="70" width="172" height="84" rx="12"/><rect x="276" y="86" width="5" height="52" rx="2.5" fill="#ff9900"/><text class="title" x="296" y="100">EC2 consumer</text><text class="sub" x="296" y="122">one instance</text><text class="sub" x="296" y="140">systemd restarts it</text></g>
+  <g><rect class="node" x="508" y="70" width="172" height="84" rx="12"/><rect x="508" y="86" width="5" height="52" rx="2.5" fill="#ff9900"/><text class="title" x="528" y="100">Amazon S3</text><text class="sub" x="528" y="122">JSON batches</text><text class="sub" x="528" y="140">about every 15 s</text></g>
+  <g><rect class="node" x="740" y="70" width="172" height="84" rx="12"/><rect x="740" y="86" width="5" height="52" rx="2.5" fill="#ff3621"/><text class="title" x="760" y="100">Databricks</text><text class="sub" x="760" y="122">Auto Loader</text><text class="sub" x="760" y="140">Bronze, Silver</text></g>
+  <text class="good" x="44" y="184"><tspan style="fill:#3fb950;font-weight:700">Good for:</tspan> one stream, modest volume, a small team, the lowest cost and effort.</text>
+  <text class="good" x="44" y="206"><tspan style="fill:#d29922;font-weight:700">Limits:</tspan> one consumer is a single point of failure, one connection caps throughput, scaling is manual.</text>
+
+  <rect class="rec" x="20" y="250" width="920" height="304" rx="14"/>
+  <text class="zrec" x="40" y="274">AT LARGE SCALE · RECOMMENDED · MANAGED, ELASTIC, REPLAYABLE</text>
+  <path id="b0" class="flow" d="M184,342 H222"/><path id="b1" class="flow" d="M366,342 H404"/><path id="b2" class="flow" d="M548,342 H586"/><path id="b3" class="flow" d="M730,342 H768"/><path class="run" d="M184,342 H222"/><path class="run" d="M366,342 H404"/><path class="run" d="M548,342 H586"/><path class="run" d="M730,342 H768"/>
+  <g><rect class="node" x="40" y="300" width="144" height="84" rx="12"/><rect x="40" y="316" width="5" height="52" rx="2.5" fill="#6e7681"/><text class="title" x="60" y="330">Producers</text><text class="sub" x="60" y="352">apps · APIs · IoT</text><text class="sub" x="60" y="370">many sources</text></g>
+  <g><rect class="halo" x="222" y="300" width="144" height="84" rx="12" stroke="#ff9900"/><g><rect class="node" x="222" y="300" width="144" height="84" rx="12"/><rect x="222" y="316" width="5" height="52" rx="2.5" fill="#ff9900"/><text class="title" x="242" y="330">Kinesis</text><text class="sub" x="242" y="352">Data Streams</text><text class="sub" x="242" y="370">shards · replay</text></g></g>
+  <g><rect class="halo" x="404" y="300" width="144" height="84" rx="12" stroke="#ff9900" style="animation-delay:1.2s"/><g><rect class="node" x="404" y="300" width="144" height="84" rx="12"/><rect x="404" y="316" width="5" height="52" rx="2.5" fill="#ff9900"/><text class="title" x="424" y="330">Firehose</text><text class="sub" x="424" y="352">managed buffering</text><text class="sub" x="424" y="370">retries · Parquet</text></g></g>
+  <g><rect class="node" x="586" y="300" width="144" height="84" rx="12"/><rect x="586" y="316" width="5" height="52" rx="2.5" fill="#ff9900"/><text class="title" x="606" y="330">Amazon S3</text><text class="sub" x="606" y="352">raw landing zone</text><text class="sub" x="606" y="370">partitioned</text></g>
+  <g><rect class="node" x="768" y="300" width="144" height="84" rx="12"/><rect x="768" y="316" width="5" height="52" rx="2.5" fill="#ff3621"/><text class="title" x="788" y="330">Databricks</text><text class="sub" x="788" y="352">Auto Loader</text><text class="sub" x="788" y="370">medallion layers</text></g>
+  <path class="alt" d="M294,384 V420 H840 V388" marker-end="url(#av)"/>
+  <text class="edge" x="567" y="440" text-anchor="middle" style="fill:#a371f7">optional: Structured Streaming reads Kinesis directly for seconds-level latency</text>
+  <text class="body" x="44" y="482">•  Elastic: add shards instead of servers to patch</text>
+  <text class="body" x="44" y="504">•  Replayable: retention lets you reprocess after a failure</text>
+  <text class="body" x="44" y="526">•  Many consumers: analytics and alerts read the same stream</text>
+  <text class="body" x="500" y="482">•  Managed delivery: Firehose buffers, retries and writes S3 files</text>
+  <text class="body" x="500" y="504">•  Same downstream: Auto Loader, Bronze, Silver and Gold unchanged</text>
+  <text class="body" x="500" y="526">•  Add infrastructure as code and delivery alarms</text>
+  <g filter="url(#glow)"><circle r="4" fill="#58a6ff"><animateMotion dur="1.4s" begin="0.0s" repeatCount="indefinite"><mpath href="#a0"/></animateMotion></circle><circle r="4" fill="#58a6ff"><animateMotion dur="1.4s" begin="0.7s" repeatCount="indefinite"><mpath href="#a0"/></animateMotion></circle><circle r="4" fill="#58a6ff"><animateMotion dur="1.4s" begin="0.2s" repeatCount="indefinite"><mpath href="#a1"/></animateMotion></circle><circle r="4" fill="#58a6ff"><animateMotion dur="1.4s" begin="0.9s" repeatCount="indefinite"><mpath href="#a1"/></animateMotion></circle><circle r="4" fill="#58a6ff"><animateMotion dur="1.4s" begin="0.4s" repeatCount="indefinite"><mpath href="#a2"/></animateMotion></circle><circle r="4" fill="#58a6ff"><animateMotion dur="1.4s" begin="1.1s" repeatCount="indefinite"><mpath href="#a2"/></animateMotion></circle><circle r="4" fill="#58a6ff"><animateMotion dur="1.4s" begin="0.0s" repeatCount="indefinite"><mpath href="#b0"/></animateMotion></circle><circle r="4" fill="#58a6ff"><animateMotion dur="1.4s" begin="0.7s" repeatCount="indefinite"><mpath href="#b0"/></animateMotion></circle><circle r="4" fill="#58a6ff"><animateMotion dur="1.4s" begin="0.2s" repeatCount="indefinite"><mpath href="#b1"/></animateMotion></circle><circle r="4" fill="#58a6ff"><animateMotion dur="1.4s" begin="0.9s" repeatCount="indefinite"><mpath href="#b1"/></animateMotion></circle><circle r="4" fill="#58a6ff"><animateMotion dur="1.4s" begin="0.4s" repeatCount="indefinite"><mpath href="#b2"/></animateMotion></circle><circle r="4" fill="#58a6ff"><animateMotion dur="1.4s" begin="1.1s" repeatCount="indefinite"><mpath href="#b2"/></animateMotion></circle><circle r="4" fill="#58a6ff"><animateMotion dur="1.4s" begin="0.6s" repeatCount="indefinite"><mpath href="#b3"/></animateMotion></circle><circle r="4" fill="#58a6ff"><animateMotion dur="1.4s" begin="1.3s" repeatCount="indefinite"><mpath href="#b3"/></animateMotion></circle></g>
+</svg>
