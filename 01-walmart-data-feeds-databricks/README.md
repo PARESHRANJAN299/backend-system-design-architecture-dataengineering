@@ -1,4 +1,4 @@
-# 02. Walmart data feeds into Databricks
+# 01. Walmart data feeds into Databricks
 
 System design and connection flow for pulling Walmart Data Ventures data into Databricks, one feed at a time.
 
