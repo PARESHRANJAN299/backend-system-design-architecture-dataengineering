@@ -29,6 +29,7 @@ Phase 1 settled what to request and when. Phase 2 will cover the part that comes
 | 05 | [Recovering from a pipeline gap](05-recovering-from-a-pipeline-gap/README.md) | A two-day outage found by Paresh and fixed inside the same pipeline: tracking table, status check by date, request by feed date. | 🔍 In progress |
 | 06 | [Final architecture: Walmart to Bronze to Silver](06-final-architecture-bronze-to-silver/README.md) | The complete flow: direct ingestion to Bronze, Silver changes and quality checks, recovery by stage, workflow and deployment. | 🔍 In progress |
 | 07 | [Multiple feeds in one pipeline](07-multiple-feeds-in-one-pipeline/README.md) | One run, several feeds: a request per feed, shared credentials, a Bronze table per feed, sequential or parallel, configuration-driven. | 🔍 In progress |
+| 08 | [Interview questions and answers](08-interview-questions-and-answers/README.md) | 26 questions on the whole architecture: authentication, loading and recovery, Bronze and Silver correctness, trade-offs. | 📝 Reference |
 
 More Phase 2 folders will be added once the understanding is complete and confirmed.
 
