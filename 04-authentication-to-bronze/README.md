@@ -1,5 +1,7 @@
 # 04. How our Databricks pipeline securely collects Walmart data
 
+> **Update:** the final design, in [06](../06-final-architecture-bronze-to-silver/README.md), ingests **directly into Bronze** with no landing layer and no Auto Loader. Landing-location and Auto Loader steps in this folder are superseded.
+
 Step by step: from the one-time key setup, through authenticating every request, to download links, landing files and writing Bronze Delta.
 
 All animations use placeholder values only. No real private key, live signature or usable download URL appears anywhere. The top-left "Your logo" box is a placeholder for the company logo.

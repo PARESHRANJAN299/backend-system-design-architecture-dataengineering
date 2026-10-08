@@ -1,5 +1,7 @@
 # 05. Recovering from a pipeline gap
 
+> **Update:** the final design, in [06](../06-final-architecture-bronze-to-silver/README.md), ingests **directly into Bronze** with no landing layer and no Auto Loader. Landing-location and Auto Loader steps in this folder are superseded.
+
 The pipeline is built and running, then it silently stops for two days. When it restarts it loads only the latest delivery, so two days of data are missing. Paresh, the senior data engineer, finds the gap and fixes it **inside the same pipeline**, with no second pipeline and no extra schedule.
 
 The dates and the one-delivery-per-day pattern are an example scenario. The Walmart details (the feed-date request, the status check by date, the 45-day retention) come from my notes on the Walmart Data Ventures documentation, and I have not checked them against the API reference. Parameter names are ours, not Walmart's.

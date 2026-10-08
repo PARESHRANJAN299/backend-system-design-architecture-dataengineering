@@ -1,5 +1,7 @@
 # 03. Production pipeline design
 
+> **Update:** the final design, in [06](../06-final-architecture-bronze-to-silver/README.md), ingests **directly into Bronze** with no landing layer and no Auto Loader. Landing-location and Auto Loader steps in this folder are superseded.
+
 A simple, high-level production approach for Walmart Store Sales: **one parameterized job** collects the data into Delta, and **the team reads from Delta** instead of calling Walmart each time.
 
 This is a proposed design, not a built pipeline. Parameter names such as `load_mode` are my own, not Walmart's.

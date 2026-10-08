@@ -20,13 +20,14 @@ The animations are in each folder's `animations/` directory. Parts that are prop
 
 Phase 1 settled what to request and when. Phase 2 will cover the part that comes after:
 
-- **How the data reaches Bronze Delta:** where the downloaded files land and how they are loaded into the Bronze table.
+- **How the data reaches Bronze Delta:** the confirmed design ingests directly into Bronze, with no landing layer and no Auto Loader.
 - **How the pipeline runs reliably:** retries, tracking what loaded, handling failures and missed deliveries.
 
 | # | Folder | What it covers | Status |
 | --- | --- | --- | --- |
 | 04 | [Authentication to Bronze](04-authentication-to-bronze/README.md) | One-time key setup, signing every request, download links, landing files and writing Bronze Delta, with failure cases. | 🔍 In progress |
 | 05 | [Recovering from a pipeline gap](05-recovering-from-a-pipeline-gap/README.md) | A two-day outage found by Paresh and fixed inside the same pipeline: tracking table, status check by date, request by feed date. | 🔍 In progress |
+| 06 | [Final architecture: Walmart to Bronze to Silver](06-final-architecture-bronze-to-silver/README.md) | The complete flow: direct ingestion to Bronze, Silver changes and quality checks, recovery by stage, workflow and deployment. | 🔍 In progress |
 
 More Phase 2 folders will be added once the understanding is complete and confirmed.
 
