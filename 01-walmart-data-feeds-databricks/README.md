@@ -1,5 +1,7 @@
 # 01. Walmart data feeds into Databricks
 
+> **Clarification:** "one request, one feed" means one feed per **request**, not one feed per pipeline run. One run can make several feed requests. See [07](../07-multiple-feeds-in-one-pipeline/README.md).
+
 System design and connection flow for pulling Walmart Data Ventures data into Databricks, one feed at a time.
 
 ## My feed understanding
